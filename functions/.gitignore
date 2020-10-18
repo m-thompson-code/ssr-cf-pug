@@ -5,6 +5,7 @@ dist
 # Environment files
 certs
 .runtimeconfig.json
+src/config/config.ts
 
 # Except the ESLint config file
 !.eslintrc.js

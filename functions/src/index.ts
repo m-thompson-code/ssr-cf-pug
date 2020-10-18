@@ -4,6 +4,7 @@ import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as path from 'path';
 
+// TODO: figure out how to avoid these warnings
 /* eslint comma-dangle: 0 */  // --> OFF
 /* eslint import/no-unresolved: 0 */  // --> OFF
 import { envConfig } from './config/config';
