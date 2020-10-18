@@ -11,7 +11,7 @@ export interface ProjectConfig {
         "token_uri": string;
         "auth_provider_x509_cert_url": string;
         "client_x509_cert_url": string;
-    },
+    };
     // databasePollingUrls: string[],
     // sendGrid: {
     //     "apiKey": string;

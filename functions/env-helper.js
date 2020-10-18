@@ -71,7 +71,7 @@ const configPath = root('./src/config');
 const outputPath = path.join(configPath, 'config.ts');
 
 mkdirp(configPath);
-fs.writeFileSync(outputPath, `import { ProjectConfig } from './config.types';\n\nexport const envConfig: ProjectConfig = ${JSON.stringify(envConfig, null, 4)};`);
+fs.writeFileSync(outputPath, `/* eslint import/no-unresolved: 0 */  // --> OFF\nimport { ProjectConfig } from './config.types';\n\n/* eslint comma-dangle: 0 */  // --> OFF\nexport const envConfig: ProjectConfig = ${JSON.stringify(envConfig, null, 4)};`);
 
 console.log(`\n ~ env-helper: END\n`);
 

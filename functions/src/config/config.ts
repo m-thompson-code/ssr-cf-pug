@@ -1,5 +1,7 @@
-import { ProjectConfig } from './config.types';
+/* eslint import/no-unresolved: 0 */  // --> OFF
+import { ProjectConfig } from './config-types';
 
+/* eslint comma-dangle: 0 */  // --> OFF
 export const envConfig: ProjectConfig = {
     "env": "staging",
     "adminCerts": {

@@ -4,6 +4,8 @@ import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as path from 'path';
 
+/* eslint comma-dangle: 0 */  // --> OFF
+/* eslint import/no-unresolved: 0 */  // --> OFF
 import { envConfig } from './config/config';
 
 const SSR_PREFIX = '__ssr__';
