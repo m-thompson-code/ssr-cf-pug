@@ -1,0 +1,6 @@
+{
+    "projects": {
+        "prod": "ssr-test-moo",
+        "staging": "ssr-test-moo"
+    }
+}

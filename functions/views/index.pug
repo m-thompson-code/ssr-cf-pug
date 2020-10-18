@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title #{title}
+        meta(name="twitter:card" content="summary")
+        meta(name="og:url" content="https://ssr-test-moo.web.app/")
+        meta(name="og:title" content=title)
+        meta(name="og:description" content="Former baseball player")
+        meta(name="og:image" content=imageUrl)
+        //- link(rel="stylesheet" href="assets/server/css/server.styles.css" type="text/css")
+        link(rel="stylesheet" href=getStaticUrl("assets/server/css/server.css") type="text/css")
+
+    body
+        h1 Hello world
+        p #{title}
+        p #{imageUrl}
+        img(src=imageUrl)

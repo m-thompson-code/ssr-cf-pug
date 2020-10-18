@@ -126,6 +126,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ssr-cf-pug"
+    }
+  },
+  "defaultProject": "ssr-cf-pug",
+  "cli": {
+    "analytics": "263648cd-9e6d-4c99-ab4e-1d39a7141ced"
+  }
 }
