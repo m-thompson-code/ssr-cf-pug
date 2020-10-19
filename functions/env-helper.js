@@ -3,7 +3,7 @@
  * This project runs in two seperate firebase projects (prod and staging)
  * Each project requires its own certs, and this js script manages these differences
  * 
- * It is important to note that the cert files involved should exist in the certs folder found at the root of this node project (./functions/certs)
+ * It is important to note that the cert files involved should exist in the private-certs/public-certs folder found at the root of this node project (./functions/private-certs, ./functions/public-certs)
  * The following array map is to seperate the prod and staging file names found in certs
  * 
  * These files involved are expected to be json files
@@ -16,6 +16,11 @@ const _c = [
         prop: 'adminCerts',
         prod: 'ssr-test-moo-firebase-adminsdk-a8xyn-013005c942.json',// TODO: setup with actual prod project admin cert
         staging: 'ssr-test-moo-firebase-adminsdk-a8xyn-013005c942.json',
+    },
+    {
+        prop: 'firebaseSDKConfig',
+        prod: 'firebase-sdk-staging-config.json',// TODO: setup with actual prod project admin cert
+        staging: 'firebase-sdk-staging-config.json',
     },
 ];
 
@@ -54,10 +59,20 @@ try {
     for (const __c of _c) {
         const filename = __c[env];
 
-        const _path = path.join(root('./certs', filename));
-        const certJsonStr = fs.readFileSync(_path, "utf8");
+        const _private_path = path.join(root('./private-certs', filename));
+        const _public_path = path.join(root('./public-certs', filename));
 
-        envConfig[__c.prop] = JSON.parse(certJsonStr);
+        try {
+            const certJsonStr = fs.readFileSync(_private_path, "utf8");
+            envConfig[__c.prop] = JSON.parse(certJsonStr);
+        } catch(error) {
+            if (error.code !== 'ENOENT') {
+                console.error(error);
+            }
+
+            const certJsonStr = fs.readFileSync(_public_path, "utf8");
+            envConfig[__c.prop] = JSON.parse(certJsonStr);
+        }
     }
 }catch(error) {
     console.error(error && error.message || error);
@@ -71,7 +86,7 @@ const configPath = root('./src/config');
 const outputPath = path.join(configPath, 'config.ts');
 
 mkdirp(configPath);
-fs.writeFileSync(outputPath, `/* eslint import/no-unresolved: 0 */  // --> OFF\nimport { ProjectConfig } from './config.types';\n\n/* eslint comma-dangle: 0 */  // --> OFF\nexport const envConfig: ProjectConfig = ${JSON.stringify(envConfig, null, 4)};`);
+fs.writeFileSync(outputPath, `/* eslint import/no-unresolved: 0 */  // --> OFF\nimport { ProjectConfig } from './config-types';\n\n/* eslint comma-dangle: 0 */  // --> OFF\nexport const envConfig: ProjectConfig = ${JSON.stringify(envConfig, null, 4)};`);
 
 console.log(`\n ~ env-helper: END\n`);
 

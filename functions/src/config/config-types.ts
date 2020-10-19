@@ -12,7 +12,8 @@ export interface ProjectConfig {
         "auth_provider_x509_cert_url": string;
         "client_x509_cert_url": string;
     };
-    // databasePollingUrls: string[],
+    firebaseSDKConfig: FirebaseSDKConfig;
+    // databasePollingUrls: string[];
     // sendGrid: {
     //     "apiKey": string;
     //     "old_apiKey": string;
@@ -21,4 +22,15 @@ export interface ProjectConfig {
     // emailUnsubscribe: {
     //     "secret": string;
     // }
+}
+
+export interface FirebaseSDKConfig {
+    apiKey: "AIzaSyDJdl0Y_uYLyjLLHzqjmSzQMZWOJiTsiag";
+    authDomain: "ssr-test-moo.firebaseapp.com";
+    databaseURL: "https://ssr-test-moo.firebaseio.com";
+    projectId: "ssr-test-moo";
+    storageBucket: "ssr-test-moo.appspot.com";
+    messagingSenderId: "664404175228";
+    appId: "1:664404175228:web:ca197e9ff5503d39489cf9";
+    measurementId: "G-JF29D2TQLS";
 }

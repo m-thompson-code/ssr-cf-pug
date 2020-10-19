@@ -4,15 +4,19 @@
     "lint": "eslint \"src/**/*\"",
     "env:staging": "firebase use staging && node env-helper staging",
     "env:prod": "firebase use prod && node env-helper prod",
-    "build": "tsc && npm run scss",
-    "serve": "npm run env:staging && npm run local-styles-on && npm run build && concurrently \"node local-styles.js\" \"firebase emulators:start --only functions\"",
+    "build:staging": "tsc && npm run scss:staging",
+    "build": "npm run build:prod",
+    "build:prod": "tsc && npm run scss:prod",
+    "serve": "npm run env:staging && npm run local-styles-on && npm run build:staging && concurrently \"node local-styles.js\" \"firebase emulators:start --only functions\"",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "npm run env:prod && firebase deploy --only functions",
     "logs": "firebase functions:log",
     "local-styles-on": "node set-use-local-styles on",
     "local-styles-off": "node set-use-local-styles off",
-    "scss": "node-sass scss -o assets/server/css && node move-scss-to-angular"
+    "scss": "npm run scss:staging",
+    "scss:staging": "node-sass scss -o assets/server/css --output-style expanded --indent-type tab && node move-scss-to-angular",
+    "scss:prod": "node-sass scss -o assets/server/css --output-style compressed --indent-type tab && node move-scss-to-angular"
   },
   "engines": {
     "node": "10"

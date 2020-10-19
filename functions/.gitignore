@@ -4,6 +4,8 @@ dist
 
 # Environment files
 certs
+private-certs/*
+!private-certs/readme.me
 .runtimeconfig.json
 src/config/config.ts
 

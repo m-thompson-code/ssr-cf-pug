@@ -3,17 +3,18 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "env:staging": "firebase use staging",
+    "env:prod": "firebase use prod",
     "start": "ng serve --open --progress",
-    "build": "npm run local-styles-off && ng build --prod",
-    "serve": "npm run local-styles-off && firebase serve",
+    "build:staging": "npm run env:staging && npm run --prefix functions local-styles-off && npm run --prefix functions build:staging && ng build --prod",
+    "build:prod": "npm run env:prod && npm run --prefix functions local-styles-off && npm run --prefix functions build:prod && ng build --prod",
+    "serve": "npm run build:staging && firebase serve",
     "deploy": "npm run deploy:staging",
-    "deploy:staging": "firebase use staging && npm run build && firebase deploy",
-    "deploy:prod": "firebase use prod && npm run build && firebase deploy",
+    "deploy:staging": "npm run build:staging && firebase deploy",
+    "deploy:prod": "npm run build:prod && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "local-styles-on": "node functions/set-use-local-styles on",
-    "local-styles-off": "node functions/set-use-local-styles off"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

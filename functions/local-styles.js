@@ -16,7 +16,7 @@ const hostLocalStyles = (port) => {
 
     // Host local static assets (you should use a different PORT than the occupied ports used by the frameworks of this project: 4000 firebase serve debugger, 4200 (angular) 5000 (firebase serve) 5001 (firebase cloud functions serve))
     local_styles.listen(_port, () => {
-        console.log(`~ local-styles.js - Node Express styles server listening on http://localhost:${_port}/assets/*`);
+        console.log(` ~ local-styles.js - Node Express styles server listening on http://localhost:${_port}/assets/*`);
     });
 }
 

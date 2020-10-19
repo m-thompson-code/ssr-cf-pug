@@ -8,6 +8,7 @@ import * as path from 'path';
 /* eslint comma-dangle: 0 */  // --> OFF
 /* eslint import/no-unresolved: 0 */  // --> OFF
 import { envConfig } from './config/config';
+import { FirebaseSDKConfig } from './config/config-types';
 
 const SSR_PREFIX = '__ssr__';
 
@@ -42,10 +43,12 @@ const getStaticUrl = (subPath: string): string => {
     return _p;
 }
 
-const getPugTemplateBindings = (obj: {[attr: string]: any}): {[attr: string]: any, getStaticUrl: (subPath: string) => string} => {
-    const _o: {[attr: string]: any, getStaticUrl: (subPath: string) => string} = {
+const getPugTemplateBindings = (obj: {[attr: string]: any}): {[attr: string]: any, getStaticUrl: (subPath: string) => string, firebaseSDKConfig: FirebaseSDKConfig, firebaseSDKConfigSerialized: string} => {
+    const _o: {[attr: string]: any, getStaticUrl: (subPath: string) => string, firebaseSDKConfig: FirebaseSDKConfig, firebaseSDKConfigSerialized: string} = {
         ...obj, // Create shallow clone of obj
         getStaticUrl: getStaticUrl, // add getStaticUrl
+        firebaseSDKConfig: envConfig.firebaseSDKConfig, // add firebaseSDKConfig for passing json to template
+        firebaseSDKConfigSerialized: JSON.stringify(envConfig.firebaseSDKConfig, null, 4), // Pass serialized json so it can be used in <script> for initalizing firebase
     };
 
     return _o;
